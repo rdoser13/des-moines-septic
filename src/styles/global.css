@@ -157,7 +157,9 @@ img { max-width: 100%; height: auto; display: block; }
 
 /* Hero */
 .hero {
-  background: var(--navy);
+  background:
+    linear-gradient(rgba(0, 59, 115, 0.88), rgba(0, 59, 115, 0.92)),
+    url('/images/septic-tank-pumping-des-moines.jpg') center / cover no-repeat;
   color: #fff;
   padding: 70px 0;
   text-align: center;
