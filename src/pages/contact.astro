@@ -1,0 +1,75 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { SITE, SERVICES } from '../data/site';
+const title = "Contact Des Moines Septic | (515) 303-4896";
+const description = "Call or text Des Moines Septic for fast quotes and 24/7 emergency dispatch across the Des Moines metro.";
+---
+<Layout {title} {description}>
+  <section class="hero">
+    <div class="container">
+      <h1>Contact Des Moines Septic</h1>
+      <p class="lead">Call, text, or send a quick message. We answer 24/7 for emergencies.</p>
+      <a href={`tel:${SITE.phoneTel}`} class="hero-phone">📞 {SITE.phone}</a>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container" style="max-width:980px">
+      <div class="grid grid-2">
+        <div>
+          <h2>Request Service</h2>
+          <p>Fill out the form and we'll call you back fast.</p>
+          <form class="form" action="https://api.web3forms.com/submit" method="POST" id="lead-form">
+            <input type="hidden" name="access_key" value={SITE.web3formsKey} />
+            <input type="hidden" name="subject" value="New Lead from Des Moines Septic" />
+            <input type="hidden" name="from_name" value="Des Moines Septic Website" />
+            <input type="hidden" name="redirect" value="https://desmoinesseptic.com/contact/?sent=1" />
+            <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off" />
+            <input type="text" name="name" placeholder="Your Name *" required />
+            <input type="tel" name="phone" placeholder="Phone Number *" required />
+            <input type="email" name="email" placeholder="Email" />
+            <input type="text" name="city" placeholder="City (Des Moines, Ankeny, etc.)" />
+            <select name="service" required>
+              <option value="">Service Needed *</option>
+              {SERVICES.map(s => <option>{s.title}</option>)}
+              <option>Other</option>
+            </select>
+            <textarea name="message" placeholder="Tell us what's going on with your septic system"></textarea>
+            <button type="submit" class="btn btn-lg">Send Request</button>
+            <p id="form-status" style="margin:0;font-size:.95rem"></p>
+          </form>
+        </div>
+        <div>
+          <h2>Call or Text</h2>
+          <p style="font-size:1.5rem;font-weight:800;font-family:Montserrat,sans-serif"><a href={`tel:${SITE.phoneTel}`}>{SITE.phone}</a></p>
+          <p><strong>Hours:</strong> 24/7 Emergency Service<br/>Routine service: 7 AM to 7 PM, 7 days a week</p>
+          <p><strong>Service Area:</strong> Des Moines, West Des Moines, Ankeny, Waukee, Norwalk, and surrounding Polk, Dallas, and Warren County addresses.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script is:inline>
+    const f = document.getElementById('lead-form');
+    const st = document.getElementById('form-status');
+    f?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      st.style.color = '#003B73';
+      st.textContent = 'Sending…';
+      const data = new FormData(f);
+      try {
+        const r = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
+        const j = await r.json();
+        if (j.success) {
+          st.style.color = '#37A82F';
+          st.textContent = 'Thanks. Our team will get back to you as soon as possible.';
+          f.reset();
+        } else {
+          st.style.color = '#c8311e';
+          st.textContent = 'Something went wrong. Please call (515) 303-4896 directly.';
+        }
+      } catch {
+        st.style.color = '#c8311e';
+        st.textContent = 'Something went wrong. Please call (515) 303-4896 directly.';
+      }
+    });
+  </script>
+</Layout>

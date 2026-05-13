@@ -1,0 +1,38 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { SITE } from '../data/site';
+const title = "About Des Moines Septic | Local Iowa Septic Service";
+const description = "Local septic tank services in Des Moines, IA. Licensed, insured, fast, and reliable.";
+---
+<Layout {title} {description}>
+  <section class="hero">
+    <div class="container">
+      <h1>About Des Moines Septic</h1>
+      <p class="lead">Reliable septic service for homeowners and businesses across the Des Moines metro.</p>
+      <a href={`tel:${SITE.phoneTel}`} class="hero-phone">📞 {SITE.phone}</a>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container" style="max-width:820px">
+      <h2>Local Septic Service You Can Count On</h2>
+      <p>Des Moines Septic is a local Iowa septic company serving homeowners and businesses across the Des Moines metro. We show up, solve the problem, and make septic service simple. No 800-number call centers, no surprise charges, no automatic upsells to full replacement when a basic repair will do. When you call our (515) number, you reach a local Iowa dispatcher, not a national booking service.</p>
+      <p>Our crew is licensed, insured, and Iowa Time of Transfer certified. We carry the proper septage hauler licensing required for legal pumping and disposal in Iowa, and we run our service the way we'd want service run on our own homes: honest inspection first, then a quote, then the work.</p>
+      <h2>What We Do</h2>
+      <ul class="checks">
+        <li>Septic tank pumping (residential and commercial)</li>
+        <li>Septic tank cleaning</li>
+        <li>Septic tank repair (baffles, risers, drain fields)</li>
+        <li>24/7 emergency septic service</li>
+        <li>Iowa-certified Time of Transfer septic inspections (administered through IOWWA, the Iowa Onsite Waste Water Association)</li>
+      </ul>
+      <h2>Where We Serve</h2>
+      <p>Des Moines, West Des Moines, Ankeny, Waukee, and Norwalk, plus the surrounding Polk, Dallas, and Warren County addresses.</p>
+    </div>
+  </section>
+  <section class="cta-band">
+    <div class="container">
+      <h2>Ready to Schedule?</h2>
+      <a href={`tel:${SITE.phoneTel}`} class="btn btn-lg">Call {SITE.phone}</a>
+    </div>
+  </section>
+</Layout>

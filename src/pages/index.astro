@@ -1,0 +1,160 @@
+---
+import Layout from '../layouts/Layout.astro';
+import FAQ from '../components/FAQ.astro';
+import { SITE, SERVICES, SUBURBS } from '../data/site';
+
+const title = "Des Moines Septic Tank Services | Pumping, Repair & Inspection";
+const description = "Local septic tank pumping, cleaning, repair, and Iowa Time of Transfer inspection across the Des Moines metro. Flat-rate pricing. 24/7 emergency response. Call (515) 303-4896.";
+
+const icons: Record<string, string> = {
+  "septic-tank-pumping": "🚛",
+  "septic-tank-cleaning": "💧",
+  "septic-tank-repair": "🔧",
+  "emergency-septic-service": "🚨",
+  "septic-inspection": "📋"
+};
+
+const faqs = [
+  { q: "How often should a septic tank be pumped in Des Moines?", a: "Most Des Moines area homes should pump every 3 to 5 years. The exact interval depends on tank size and household size. If you can't remember the last septic tank pumping, it's time. Iowa's clay-heavy Des Moines Lobe soils don't tolerate a full tank as well as sandier regions." },
+  { q: "What are signs my septic tank is full?", a: "Slow drains throughout the house, sewage smell indoors or in the yard, gurgling pipes, standing water or bright green grass over the drain field, or sewage backing up into tubs and floor drains. Any of these means you need septic tank pumping in Des Moines now, not later." },
+  { q: "Do you offer emergency septic pumping in Des Moines?", a: "Yes. We answer 24/7 and typically dispatch within 90 to 120 minutes for emergency septic service across the Des Moines metro. Call (515) 303-4896 anytime." },
+  { q: "How much does septic tank pumping cost in Des Moines, IA?", a: "Standard residential septic pumping in Des Moines runs $375 to $650 depending on tank size and access. We confirm the final price on the phone before sending a truck. No surprise charges." },
+  { q: "Do you service both residential and commercial septic systems?", a: "Yes. We handle residential septic in Des Moines plus commercial septic, grease interceptor pumping, and hydro-jetting for restaurants and businesses across central Iowa." },
+  { q: "Do you handle Iowa Time of Transfer inspections?", a: "Yes. Iowa's Time of Transfer law (Iowa Code § 455B.172, implemented through 567 IAC Chapter 69) requires a certified inspection before transferring property with a septic system. We provide certified Time of Transfer inspections across Polk, Dallas, Warren, Madison, Marion, Jasper, Story, and Boone Counties." },
+  { q: "What areas around Des Moines do you serve?", a: "Des Moines, West Des Moines, Ankeny, Waukee, Norwalk, plus the surrounding Polk, Dallas, Warren, and Madison County addresses. If you're in central Iowa and you're on septic, we probably cover you." }
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(f => ({ "@type": "Question", "name": f.q, "acceptedAnswer": { "@type": "Answer", "text": f.a } }))
+};
+---
+<Layout {title} {description} schema={faqSchema}>
+  <section class="hero">
+    <div class="container">
+      <h1>Des Moines Septic Tank Pumping &amp; Repair</h1>
+      <p class="lead">We provide septic tank pumping, cleaning, repair, and inspection in Des Moines, IA and the surrounding counties. Call now for fast local service and a free estimate.</p>
+      <a href={`tel:${SITE.phoneTel}`} class="hero-phone">📞 {SITE.phone}</a>
+      <div class="hero-cta">
+        <a href={`tel:${SITE.phoneTel}`} class="btn btn-lg">Call Now</a>
+        <a href="/contact/" class="btn btn-outline btn-lg" style="background:transparent;color:#fff;border-color:#fff">Request a Free Estimate</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="trust-bar">
+    <div class="container">
+      <span>Iowa Time-of-Transfer Certified</span>
+      <span>24/7 Emergency Service</span>
+      <span>Residential and Commercial</span>
+      <span>Licensed and Insured</span>
+      <span>Free Estimates</span>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>Septic Tank Services in Des Moines, IA</h2>
+        <p>Des Moines Septic is your local team for septic tank pumping, cleaning, repair, emergency service, and Iowa-certified inspections. Real local crews. Honest pricing. Fast response across the Des Moines metro.</p>
+      </div>
+      <div class="grid grid-5">
+        {SERVICES.map(s => (
+          <a href={`/${s.slug}/`} class="service-card">
+            <div class="icon">{icons[s.slug]}</div>
+            <h3>{s.title}</h3>
+            <span class="more">Learn More →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-light">
+    <div class="container">
+      <div class="grid grid-2" style="align-items:center;gap:50px">
+        <div>
+          <img src="/images/septic-tank-pumping-des-moines.jpg" alt="Local Des Moines septic technician kneeling beside an open septic tank, feeding a vacuum hose into the riser during a residential pumping service" loading="lazy" decoding="async" style="border-radius:8px;box-shadow:0 4px 14px rgba(0,0,0,.08);max-height:380px;width:100%;object-fit:cover" />
+        </div>
+        <div>
+          <h2>Septic Tank Pumping in Des Moines</h2>
+          <p>Routine septic tank pumping is the single most important service for keeping your system healthy. We recommend pumping every 3 to 5 years for most Des Moines households. Wait too long and solids migrate into your drain field, turning a $475 pump into a $10,000 drain field repair.</p>
+          <p>Our local Des Moines crew dispatches same-day for most addresses, with flat-rate pricing confirmed before the truck leaves. Most jobs run $375 to $650 depending on tank size and access.</p>
+          <a href="/septic-tank-pumping/" class="btn">Septic Tank Pumping Details</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid grid-2" style="align-items:center;gap:50px">
+        <div>
+          <h2>Septic Tank Cleaning in Des Moines</h2>
+          <p>Septic tank cleaning goes beyond pumping. After we pump the tank, we wash down the walls, inspect the inlet and outlet baffles, clean any effluent filter, and check for cracks, root intrusion, or other damage. We recommend full cleaning every other pump.</p>
+          <p>If you've gone more than 4 years since the last service, cleaning is the right call. Iowa's clay-heavy Des Moines Lobe soils make a properly clean tank matter more than they would in sandier regions.</p>
+          <a href="/septic-tank-cleaning/" class="btn">Septic Cleaning Details</a>
+        </div>
+        <div>
+          <img src="/images/septic-tank-cleaning-des-moines.jpg" alt="Septic technician performing a residential septic tank cleaning in a Des Moines suburban yard, with vacuum truck staged behind the open tank" loading="lazy" decoding="async" style="border-radius:8px;box-shadow:0 4px 14px rgba(0,0,0,.08);max-height:380px;width:100%;object-fit:cover" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="container">
+      <h2>Septic Emergency in Des Moines? Call Now.</h2>
+      <p>Sewage backup, overflow, or tank failure? We answer 24/7 and dispatch within 90 to 120 minutes.</p>
+      <a href={`tel:${SITE.phoneTel}`} class="btn btn-lg">📞 Call {SITE.phone}</a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container" style="max-width:820px">
+      <h2>Iowa Septic Inspections &amp; Time of Transfer</h2>
+      <p>Selling a Des Moines area home with a septic system? Iowa's Time of Transfer law (Iowa Code § 455B.172, implemented through 567 IAC Chapter 69) requires a certified Time of Transfer inspection before the property can change hands. Polk County, Dallas County, and Warren County all enforce this.</p>
+      <p>We are Iowa-certified Time of Transfer inspectors and can typically schedule within 3 to 5 business days. Full report delivered to your title company. Inspections also recommended for buyers before closing on any septic property.</p>
+      <a href="/septic-inspection/" class="btn">Inspection Details</a>
+    </div>
+  </section>
+
+  <section class="section bg-light">
+    <div class="container">
+      <div class="section-head">
+        <h2>Septic Tank Service Near Me: Des Moines Metro</h2>
+        <p>We provide local septic tank service across the Des Moines metro and surrounding counties.</p>
+      </div>
+      <div class="chips">
+        {SUBURBS.map(s => <a href={`/${s.slug}/`} class="chip">Septic in {s.name}, IA</a>)}
+      </div>
+      <p style="text-align:center;margin-top:24px"><strong>Counties served:</strong> Polk, Dallas, Warren, Madison, Marion, Jasper, Story, and Boone.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container" style="max-width:820px">
+      <h2>Why Choose Des Moines Septic</h2>
+      <ul class="checks">
+        <li><strong>Local Iowa team.</strong> Real (515) number, real local dispatch.</li>
+        <li><strong>24/7 emergency response.</strong> Septic emergencies don't wait. Neither do we.</li>
+        <li><strong>Flat-rate pricing.</strong> Confirmed on the phone before we send a truck.</li>
+        <li><strong>Iowa Time of Transfer certified.</strong> For Polk, Dallas, Warren, and Madison Counties.</li>
+        <li><strong>Honest quotes.</strong> We inspect before we recommend repair vs. replacement.</li>
+        <li><strong>Licensed and insured.</strong> Full liability coverage and proper septage hauler licensing.</li>
+      </ul>
+      <a href={`tel:${SITE.phoneTel}`} class="btn">Call {SITE.phone}</a>
+    </div>
+  </section>
+
+  <FAQ items={faqs} />
+
+  <section class="cta-band">
+    <div class="container">
+      <h2>Reliable Septic Service in Des Moines</h2>
+      <p>Real local team. Honest pricing. Fast response. Free estimates.</p>
+      <a href={`tel:${SITE.phoneTel}`} class="btn btn-lg">📞 Call {SITE.phone}</a>
+    </div>
+  </section>
+</Layout>

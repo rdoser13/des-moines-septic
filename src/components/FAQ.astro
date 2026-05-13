@@ -1,0 +1,17 @@
+---
+const { items = [] } = Astro.props;
+---
+<section class="section">
+  <div class="container" style="max-width:820px">
+    <div style="text-align:center;margin-bottom:36px">
+      <span class="eyebrow">Frequently Asked Questions</span>
+      <h2>Septic Service Questions, Answered</h2>
+    </div>
+    {items.map((q: any) => (
+      <details class="faq">
+        <summary>{q.q}</summary>
+        <p>{q.a}</p>
+      </details>
+    ))}
+  </div>
+</section>

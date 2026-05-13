@@ -1,0 +1,45 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { SITE, SUBURBS } from '../data/site';
+const title = "Septic Service Area | Des Moines Septic";
+const description = "We provide septic services across the Des Moines metro: Des Moines, West Des Moines, Ankeny, Waukee, and Norwalk.";
+---
+<Layout {title} {description}>
+  <section class="hero">
+    <div class="container">
+      <h1>Septic Service Across the Des Moines Metro</h1>
+      <p class="lead">Serving Des Moines, West Des Moines, Ankeny, Waukee, and Norwalk.</p>
+      <a href={`tel:${SITE.phoneTel}`} class="hero-phone">📞 {SITE.phone}</a>
+      <div class="hero-cta">
+        <a href={`tel:${SITE.phoneTel}`} class="btn btn-lg">Call Now</a>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container" style="max-width:820px">
+      <h2>Where We Provide Septic Service</h2>
+      <p>Our primary service area covers the five core Des Moines metro cities below, plus the surrounding addresses in Polk, Dallas, Warren, and Madison Counties. Routine pumping requests called in before noon are typically dispatched the same day. Emergency calls run 90 to 120 minutes from your call to a truck in your driveway.</p>
+      <p>If you're outside the five cities listed but inside central Iowa, call anyway. We regularly cover Urbandale, Clive, Johnston, Altoona, Pleasant Hill, Grimes, Indianola, Cumming, Prole, Booneville, and the rural addresses connecting them. The (515) line is staffed 24/7 and we can quote a service window over the phone.</p>
+    </div>
+  </section>
+  <section class="section bg-light">
+    <div class="container">
+      <div class="grid grid-3">
+        {SUBURBS.map(s => (
+          <a href={`/${s.slug}/`} class="service-card">
+            <h3>{s.name}, IA</h3>
+            <p style="color:var(--text-muted);margin:0 0 10px">{s.county}</p>
+            <span class="more">Local Service Details →</span>
+          </a>
+        ))}
+      </div>
+      <p style="text-align:center;margin-top:32px"><strong>Counties served:</strong> Polk, Dallas, Warren, Madison, Marion, Jasper, Story, and Boone.</p>
+    </div>
+  </section>
+  <section class="cta-band">
+    <div class="container">
+      <h2>Need Septic Service in the Des Moines Metro?</h2>
+      <a href={`tel:${SITE.phoneTel}`} class="btn btn-lg">Call {SITE.phone}</a>
+    </div>
+  </section>
+</Layout>

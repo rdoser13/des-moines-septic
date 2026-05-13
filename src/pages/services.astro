@@ -1,0 +1,58 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { SITE, SERVICES } from '../data/site';
+const title = "Septic Services in Des Moines, IA | Pumping, Cleaning, Repair";
+const description = "Full septic services in Des Moines, Iowa: pumping, cleaning, repair, emergency, and inspections. Call (515) 303-4896.";
+const icons: Record<string, string> = { "septic-tank-pumping": "🚛", "septic-tank-cleaning": "💧", "septic-tank-repair": "🔧", "emergency-septic-service": "🚨", "septic-inspection": "📋" };
+---
+<Layout {title} {description}>
+  <section class="hero">
+    <div class="container">
+      <h1>Septic Services in Des Moines, IA</h1>
+      <p class="lead">Pumping, cleaning, repair, emergency response, and inspections across the Des Moines metro.</p>
+      <a href={`tel:${SITE.phoneTel}`} class="hero-phone">📞 {SITE.phone}</a>
+      <div class="hero-cta">
+        <a href={`tel:${SITE.phoneTel}`} class="btn btn-lg">Call Now</a>
+        <a href="/contact/" class="btn btn-outline btn-lg" style="background:transparent;color:#fff;border-color:#fff">Request a Free Estimate</a>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container" style="max-width:820px">
+      <h2>Full-Service Septic Care for Iowa Homeowners</h2>
+      <p>Des Moines Septic handles every stage of the septic system lifecycle: routine pumping, full tank cleaning, repair of baffles and drain fields, emergency response when something fails, and Iowa Time of Transfer inspections when you sell. One local crew, one (515) phone number, one set of flat-rate pricing across the Des Moines metro.</p>
+      <p>We work across Polk, Dallas, Warren, and Madison Counties, and we know which county office handles which paperwork. That matters in this metro more than most: a West Des Moines acreage can sit in Polk or Dallas County depending on which side of Jordan Creek Parkway it's on, and the permit office, soil-test rules, and Time of Transfer process all change at the county line. We file with the right office the first time.</p>
+    </div>
+  </section>
+  <section class="section bg-light">
+    <div class="container">
+      <div class="grid grid-5">
+        {SERVICES.map(s => (
+          <a href={`/${s.slug}/`} class="service-card">
+            <div class="icon">{icons[s.slug]}</div>
+            <h3>{s.title}</h3>
+            <span class="more">Learn More →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container" style="max-width:820px">
+      <h2>What Every Job Includes</h2>
+      <ul class="checks">
+        <li><strong>Final price confirmed before dispatch.</strong> No mystery charges when the truck shows up.</li>
+        <li><strong>Local Iowa crew.</strong> Real (515) number, real local dispatch, not an out-of-state lead-gen handoff.</li>
+        <li><strong>Inspection before recommendation.</strong> We diagnose with photos and measurements, then quote. No automatic upsell to full replacement.</li>
+        <li><strong>Iowa Time of Transfer certified.</strong> For Polk, Dallas, Warren, and Madison Counties.</li>
+        <li><strong>24/7 emergency dispatch.</strong> Septic emergencies don't wait. Neither do we.</li>
+      </ul>
+    </div>
+  </section>
+  <section class="cta-band">
+    <div class="container">
+      <h2>Reliable Septic Service in Des Moines</h2>
+      <a href={`tel:${SITE.phoneTel}`} class="btn btn-lg">Call {SITE.phone}</a>
+    </div>
+  </section>
+</Layout>

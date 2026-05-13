@@ -1,0 +1,248 @@
+---
+import Layout from '../layouts/Layout.astro';
+import FAQ from '../components/FAQ.astro';
+import { SITE, SERVICES, SUBURBS } from '../data/site';
+import { SERVICE_CONTENT } from '../data/services-content';
+import { SUBURB_CONTENT } from '../data/suburbs-content';
+
+export function getStaticPaths() {
+  const services = SERVICES.map(s => ({ params: { slug: s.slug }, props: { kind: 'service' as const, slug: s.slug } }));
+  const suburbs = SUBURBS.map(s => ({ params: { slug: s.slug }, props: { kind: 'suburb' as const, slug: s.slug } }));
+  return [...services, ...suburbs];
+}
+
+const { kind, slug } = Astro.props as { kind: 'service' | 'suburb'; slug: string };
+const ICONS: Record<string, string> = { "septic-tank-pumping": "🚛", "septic-tank-cleaning": "💧", "septic-tank-repair": "🔧", "emergency-septic-service": "🚨", "septic-inspection": "📋" };
+const SERVICE_INLINE_IMG: Record<string, { src: string; alt: string } | null> = {
+  "septic-tank-pumping": { src: "/images/septic-pumping-hose-connection.jpg", alt: "Local Des Moines septic pumping technician connecting a vacuum hose to a residential septic tank riser" },
+  "septic-tank-cleaning": { src: "/images/two-tech-septic-crew-des-moines.jpg", alt: "Two-person Des Moines septic crew performing a full septic tank cleaning with vacuum hose at an open tank" },
+  "septic-tank-repair": { src: "/images/septic-tank-repair-des-moines.jpg", alt: "Two Des Moines septic technicians inspecting and repairing an open residential septic tank from the driveway" },
+  "emergency-septic-service": { src: "/images/emergency-septic-service-des-moines.jpg", alt: "Emergency septic service truck parked at an Iowa home, with technician dispatching a vacuum hose for fast response" },
+  "septic-inspection": { src: "/images/septic-tank-inspection-camera-iowa.jpg", alt: "Iowa-certified septic inspector running a camera inspection into a residential septic tank during a Time of Transfer inspection" }
+};
+---
+{kind === 'service' && (() => {
+  const data = SERVICE_CONTENT[slug];
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": data.faqs.map(f => ({ "@type": "Question", "name": f.q, "acceptedAnswer": { "@type": "Answer", "text": f.a } }))
+  };
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": data.title,
+    "name": data.h1,
+    "description": data.metaDesc,
+    "provider": { "@id": `https://${SITE.domain}/#business` },
+    "areaServed": ["Des Moines, IA", "West Des Moines, IA", "Ankeny, IA", "Waukee, IA", "Norwalk, IA"],
+    "url": `https://${SITE.domain}/${slug}/`
+  };
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": `https://${SITE.domain}/` },
+      { "@type": "ListItem", "position": 2, "name": "Services", "item": `https://${SITE.domain}/services/` },
+      { "@type": "ListItem", "position": 3, "name": data.title, "item": `https://${SITE.domain}/${slug}/` }
+    ]
+  };
+  return (
+    <Layout title={data.metaTitle} description={data.metaDesc} schema={[serviceSchema, breadcrumbSchema, faqSchema]}>
+      <section class="hero">
+        <div class="container">
+          <h1>{data.h1}</h1>
+          <p class="lead">{data.hero}</p>
+          <a href={`tel:${SITE.phoneTel}`} class="hero-phone">📞 {SITE.phone}</a>
+          <div class="hero-cta">
+            <a href={`tel:${SITE.phoneTel}`} class="btn btn-lg">Call Now</a>
+            <a href="/contact/" class="btn btn-outline btn-lg" style="background:transparent;color:#fff;border-color:#fff">Request a Free Estimate</a>
+          </div>
+        </div>
+      </section>
+
+      <div class="trust-bar">
+        <div class="container">
+          <span>Iowa Time-of-Transfer Certified</span>
+          <span>24/7 Emergency Service</span>
+          <span>Residential and Commercial</span>
+          <span>Licensed and Insured</span>
+          <span>Free Estimates</span>
+        </div>
+      </div>
+
+      <section class="section">
+        <div class="container" style="max-width:820px">
+          {data.sections.map((s, i) => (
+            <div style="margin-bottom:32px">
+              <h2>{s.h2}</h2>
+              {i === 1 && SERVICE_INLINE_IMG[slug] && (
+                <img src={SERVICE_INLINE_IMG[slug]!.src} alt={SERVICE_INLINE_IMG[slug]!.alt} loading="lazy" decoding="async" style="border-radius:8px;margin:0 0 20px;box-shadow:0 4px 14px rgba(0,0,0,.08);max-height:420px;width:100%;object-fit:cover" />
+              )}
+              <p>{s.body}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section class="cta-band">
+        <div class="container">
+          <h2>Schedule {data.title} in Des Moines</h2>
+          <p>Call our local team for fast service across the metro.</p>
+          <a href={`tel:${SITE.phoneTel}`} class="btn btn-lg">Call {SITE.phone}</a>
+        </div>
+      </section>
+
+      <section class="section bg-light">
+        <div class="container">
+          <div class="section-head">
+            <h2>{data.title} Available In</h2>
+          </div>
+          <div class="chips">
+            {SUBURBS.map(s => <a href={`/${s.slug}/`} class="chip">{s.name}, IA</a>)}
+          </div>
+        </div>
+      </section>
+
+      <FAQ items={data.faqs} />
+    </Layout>
+  );
+})()}
+
+{kind === 'suburb' && (() => {
+  const sub = SUBURBS.find(s => s.slug === slug)!;
+  const content = SUBURB_CONTENT[slug];
+  const TITLES = {
+    "des-moines": "Des Moines Septic Tank Service | Polk County Pumping & Repair",
+    "west-des-moines": "West Des Moines Septic Service | Polk & Dallas County Pumping",
+    "ankeny": "Ankeny Septic Tank Service, IA | Pumping, Repair & Inspection",
+    "waukee": "Waukee Septic Tank Service | Dallas County Pumping & Repair",
+    "norwalk": "Norwalk Septic Tank Service | Warren County Pumping & Repair"
+  };
+  const DESCS = {
+    "des-moines": "Local septic tank pumping, cleaning, repair, and Time of Transfer inspection across Des Moines, IA. Polk County certified. Flat-rate pricing. 24/7 emergencies.",
+    "west-des-moines": "Septic tank pumping, repair, and inspection in West Des Moines, IA. We file with the correct Polk or Dallas County office the first time. 24/7 dispatch.",
+    "ankeny": "Septic tank pumping, repair, and Polk County Time of Transfer inspections in Ankeny, IA. First-pump-cycle specialists for aging 1990s and 2000s systems.",
+    "waukee": "Septic tank pumping, repair, and Dallas County Time of Transfer inspections in Waukee, IA. Honest sewer-vs-septic guidance. 24/7 emergency dispatch.",
+    "norwalk": "Septic tank pumping, repair, and Warren County Time of Transfer inspections in Norwalk, IA. Engineered systems and Echo Valley acreages our specialty."
+  };
+  const title = (TITLES as any)[slug] || `Septic Tank Services in ${sub.name}, IA | Des Moines Septic`;
+  const description = (DESCS as any)[slug] || `Local septic tank pumping, cleaning, repair, and inspection in ${sub.name}, Iowa. Fast service. 24/7 emergencies. Call (515) 303-4896.`;
+  const faqs = [
+    { q: `Do you service all of ${sub.name}?`, a: `Yes. We cover the full ${sub.name} city limits plus surrounding ${sub.county} addresses, including ZIPs ${content.zips.join(', ')}.` },
+    { q: `How fast can you get to ${sub.name}?`, a: `Routine pumping is typically same-day if you call before noon. Emergency dispatch is 90 to 120 minutes from your call.` },
+    { q: `What does septic tank pumping cost in ${sub.name}?`, a: `Flat-rate metro pricing: $375 to $475 for a 1,000-gallon tank, $475 to $650 for a 1,500-gallon tank. Quote confirmed before dispatch.` }
+  ];
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map(f => ({ "@type": "Question", "name": f.q, "acceptedAnswer": { "@type": "Answer", "text": f.a } }))
+  };
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": `https://${SITE.domain}/` },
+      { "@type": "ListItem", "position": 2, "name": "Service Area", "item": `https://${SITE.domain}/service-area/` },
+      { "@type": "ListItem", "position": 3, "name": sub.name, "item": `https://${SITE.domain}/${slug}/` }
+    ]
+  };
+  const SUBURB_IMG = {
+    "des-moines":      { src: "/images/septic-pumping-hose-connection.jpg",     alt: `Local septic technician performing a septic tank pumping at a Des Moines, Iowa home` },
+    "west-des-moines": { src: "/images/two-tech-septic-crew-des-moines.jpg",    alt: `Two-person septic crew servicing a residential tank in West Des Moines, Iowa` },
+    "ankeny":          { src: "/images/septic-tank-cleaning-des-moines.jpg",    alt: `Septic technician cleaning a residential septic tank at an Ankeny, Iowa home` },
+    "waukee":          { src: "/images/septic-tank-repair-des-moines.jpg",      alt: `Septic technicians inspecting and repairing a residential septic tank in Waukee, Iowa` },
+    "norwalk":         { src: "/images/septic-tank-inspection-camera-iowa.jpg", alt: `Iowa-certified inspector running a camera into a septic tank at a Norwalk, Iowa property` }
+  };
+  const subImg = (SUBURB_IMG as any)[slug];
+  return (
+    <Layout {title} {description} schema={[breadcrumbSchema, faqSchema]}>
+      <section class="hero">
+        <div class="container">
+          <h1>{sub.name} Septic Tank Service</h1>
+          <p class="lead">Local septic pumping, cleaning, repair, and Iowa Time of Transfer inspection across {sub.name}, IA. Same-day routine service. 24/7 emergency dispatch.</p>
+          <a href={`tel:${SITE.phoneTel}`} class="hero-phone">📞 {SITE.phone}</a>
+          <div class="hero-cta">
+            <a href={`tel:${SITE.phoneTel}`} class="btn btn-lg">Call Now</a>
+            <a href="/contact/" class="btn btn-outline btn-lg" style="background:transparent;color:#fff;border-color:#fff">Request a Free Estimate</a>
+          </div>
+        </div>
+      </section>
+
+      <div class="trust-bar">
+        <div class="container">
+          <span>Iowa Time-of-Transfer Certified</span>
+          <span>24/7 Emergency Service</span>
+          <span>Residential and Commercial</span>
+          <span>Licensed and Insured</span>
+          <span>Free Estimates</span>
+        </div>
+      </div>
+
+      <section class="section">
+        <div class="container" style="max-width:820px">
+          <p style="font-size:1.1rem">{content.intro}</p>
+          {subImg && (
+            <img src={subImg.src} alt={subImg.alt} loading="lazy" decoding="async" style="border-radius:8px;margin:24px 0 8px;box-shadow:0 4px 14px rgba(0,0,0,.08);max-height:420px;width:100%;object-fit:cover" />
+          )}
+          <h2>{content.leadH2}</h2>
+          <p>{content.leadBody}</p>
+          <h2>{content.secondH2}</h2>
+          <p>{content.secondBody}</p>
+          <h2>{content.thirdH2}</h2>
+          <p>{content.thirdBody}</p>
+          <p><strong>ZIP codes covered:</strong> {content.zips.join(', ')}</p>
+          <div style="background:var(--light-gray);border-left:4px solid var(--green);padding:18px 22px;border-radius:6px;margin:24px 0">
+            <strong>Local tip for {sub.name}:</strong> {content.localTip}
+          </div>
+        </div>
+      </section>
+
+      <section class="cta-band">
+        <div class="container">
+          <h2>Septic Service in {sub.name}? Call Now.</h2>
+          <p>Same-day routine service. 24/7 emergency dispatch.</p>
+          <a href={`tel:${SITE.phoneTel}`} class="btn btn-lg">Call {SITE.phone}</a>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container" style="max-width:820px">
+          <h2>Septic Tank Pumping in {sub.name}</h2>
+          <p>Routine septic tank pumping is the cheapest insurance policy you can buy for your system. We pump residential tanks across {sub.name} on flat-rate pricing ($375 to $650 depending on tank size), most addresses same-day if you call before noon. <a href="/septic-tank-pumping/">More on septic tank pumping</a>.</p>
+
+          <h2>Septic Tank Cleaning in {sub.name}</h2>
+          <p>Full cleaning goes beyond pumping: wall wash-down, baffle inspection, effluent filter cleaning, and a complete tank health check. Recommended every other pump for {sub.name} homes. <a href="/septic-tank-cleaning/">More on septic tank cleaning</a>.</p>
+
+          <h2>Septic Tank Repair in {sub.name}</h2>
+          <p>Most septic problems are repairable. Baffle repair, riser installation, distribution box repair, and drain field rehabilitation cost a fraction of full replacement. We inspect and document before we quote. <a href="/septic-tank-repair/">More on septic tank repair</a>.</p>
+
+          <h2>Emergency Septic Service in {sub.name}</h2>
+          <p>Sewage backup, overflow, or tank failure? We answer 24/7 and dispatch within 90 to 120 minutes across {sub.name} and surrounding {sub.county}. <a href="/emergency-septic-service/">More on emergency septic service</a>.</p>
+
+          <h2>Septic Inspection in {sub.name}</h2>
+          <p>Iowa's Time of Transfer law (Iowa Code § 455B.172, implemented through 567 IAC Chapter 69) requires a certified Time of Transfer inspection before any property with a septic system can change hands. We carry the Iowa certification (through IOWWA, the Iowa Onsite Waste Water Association) and can typically schedule within 3 to 5 business days. <a href="/septic-inspection/">More on septic inspection</a>.</p>
+        </div>
+      </section>
+
+      <section class="section bg-light">
+        <div class="container">
+          <div class="section-head">
+            <h2>Services Available in {sub.name}</h2>
+          </div>
+          <div class="grid grid-5">
+            {SERVICES.map(s => (
+              <a href={`/${s.slug}/`} class="service-card">
+                <div class="icon">{ICONS[s.slug]}</div>
+                <h3>{s.title}</h3>
+                <span class="more">Learn More →</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <FAQ items={faqs} />
+    </Layout>
+  );
+})()}
