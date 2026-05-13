@@ -1,0 +1,59 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { SITE } from '../../data/site';
+import { BLOG_POSTS } from '../../data/blog-posts';
+
+const title = "Septic Blog | Iowa Septic Tips, Costs & Guides | Des Moines Septic";
+const description = "Practical Iowa septic guides for homeowners across the Des Moines metro. Pumping costs, schedules, warning signs, Time of Transfer rules, and Polk County permits.";
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": `https://${SITE.domain}/` },
+    { "@type": "ListItem", "position": 2, "name": "Blog", "item": `https://${SITE.domain}/blog/` }
+  ]
+};
+
+const blogSchema = {
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": `${SITE.name} Blog`,
+  "url": `https://${SITE.domain}/blog/`,
+  "publisher": { "@type": "Organization", "name": SITE.name }
+};
+---
+<Layout title={title} description={description} schema={[blogSchema, breadcrumbSchema]}>
+  <section class="hero hero-blog">
+    <div class="container hero-inner">
+      <h1>Iowa Septic Guides for Des Moines Homeowners</h1>
+      <p class="hero-sub">Practical, locally accurate guides on septic costs, schedules, warning signs, and Iowa permit rules. Written for homeowners across Polk, Dallas, Warren, and Madison Counties.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="blog-grid">
+        {BLOG_POSTS.map(post => (
+          <a href={`/blog/${post.slug}/`} class="blog-card">
+            {post.image && <img src={post.image} alt={post.imageAlt} loading="lazy" decoding="async" class="blog-card-img" />}
+            <div class="blog-card-body">
+              <h2>{post.title}</h2>
+              <p class="blog-card-meta">{post.readMinutes} min read</p>
+              <p>{post.excerpt}</p>
+              <span class="blog-card-link">Read article →</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-navy">
+    <div class="container" style="text-align:center">
+      <h2>Need Septic Service Now?</h2>
+      <p style="font-size:1.1rem;margin-bottom:24px">We provide septic tank pumping, cleaning, repair, emergency service, and Iowa Time of Transfer inspections across the Des Moines metro.</p>
+      <p><a href={`tel:${SITE.phoneTel}`} class="btn">Call {SITE.phone}</a> <a href="/contact/" class="btn btn-outline">Request a Free Estimate</a></p>
+    </div>
+  </section>
+</Layout>
