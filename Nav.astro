@@ -1,0 +1,44 @@
+---
+import { SITE, SERVICES, SUBURBS } from '../data/site';
+---
+<div class="topbar">
+  <div class="container">
+    <span>Serving Des Moines, IA and Surrounding Areas · Licensed and Insured</span>
+    <span>24/7 Emergency Service: <a href={`tel:${SITE.phoneTel}`}>{SITE.phone}</a></span>
+  </div>
+</div>
+<header class="header">
+  <div class="container header-inner">
+    <a href="/" class="logo" aria-label="Des Moines Septic">
+      <img src="/logo.png" alt="Des Moines Septic" />
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/">Home</a></li>
+      <li class="dropdown">
+        <a href="/services/">Services</a>
+        <ul class="dropdown-menu">
+          {SERVICES.map(s => <li><a href={`/${s.slug}/`}>{s.title}</a></li>)}
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="/service-area/">Locations</a>
+        <ul class="dropdown-menu">
+          {SUBURBS.map(s => <li><a href={`/${s.slug}/`}>{s.name}, IA</a></li>)}
+        </ul>
+      </li>
+      <li><a href="/blog/">Blog</a></li>
+      <li><a href="/about/">About</a></li>
+      <li><a href="/contact/">Contact</a></li>
+    </ul>
+    <div class="header-cta">
+      <a href={`tel:${SITE.phoneTel}`} class="header-phone">{SITE.phone}</a>
+      <a href="/contact/" class="btn">Request Service</a>
+      <button class="mobile-toggle" id="navToggle" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</header>
+<script>
+  const t = document.getElementById('navToggle');
+  const l = document.getElementById('navLinks');
+  t?.addEventListener('click', () => l?.classList.toggle('open'));
+</script>

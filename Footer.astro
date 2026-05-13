@@ -1,0 +1,46 @@
+---
+import { SITE, SERVICES, SUBURBS } from '../data/site';
+const year = new Date().getFullYear();
+---
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="logo-foot" style="margin-bottom:16px"><img src="/logo.png" alt="Des Moines Septic" /></div>
+        <p>Reliable septic tank pumping, cleaning, repair, and inspection in Des Moines and the surrounding metro.</p>
+        <p style="margin-top:14px"><strong style="color:#fff">Call:</strong> <a href={`tel:${SITE.phoneTel}`}>{SITE.phone}</a></p>
+        <p><strong style="color:#fff">Hours:</strong> 24/7 Emergency Service</p>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          {SERVICES.map(s => <li><a href={`/${s.slug}/`}>{s.title}</a></li>)}
+        </ul>
+      </div>
+      <div>
+        <h4>Service Area</h4>
+        <ul>
+          {SUBURBS.map(s => <li><a href={`/${s.slug}/`}>{s.name}, IA</a></li>)}
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/contact/">Contact</a></li>
+          <li><a href="/privacy/">Privacy Policy</a></li>
+          <li><a href="/terms/">Terms of Service</a></li>
+          <li><a href="/disclaimer/">Disclaimer</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="disclosure">
+      This website shares information with local, licensed, and insured septic vendors in the Des Moines metro who will reach out to provide service.
+    </p>
+    <div class="footer-bottom">
+      <span>© {year} Des Moines Septic. All rights reserved.</span>
+      <span>Des Moines, Iowa</span>
+    </div>
+  </div>
+</footer>
