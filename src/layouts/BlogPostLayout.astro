@@ -18,7 +18,7 @@ const articleSchema = {
   "datePublished": post.publishDate,
   "dateModified": post.publishDate,
   "author": { "@type": "Organization", "name": SITE.name, "url": `https://${SITE.domain}/` },
-  "publisher": { "@type": "Organization", "name": SITE.name, "logo": { "@type": "ImageObject", "url": `https://${SITE.domain}/logo.png` } },
+  "publisher": { "@type": "Organization", "name": SITE.name, "logo": { "@type": "ImageObject", "url": `https://${SITE.domain}/logo.webp` } },
   "image": post.image ? `https://${SITE.domain}${post.image}` : `https://${SITE.domain}/og.jpg`,
   "mainEntityOfPage": `https://${SITE.domain}/blog/${post.slug}/`
 };
@@ -47,7 +47,7 @@ const formattedDate = new Date(post.publishDate + 'T12:00:00').toLocaleDateStrin
         <header class="blog-post-header">
           <h1>{post.title}</h1>
           <p class="blog-post-meta">Published {formattedDate} · {post.readMinutes} min read</p>
-          {post.image && <img src={post.image} alt={post.imageAlt} class="blog-post-hero" width="1180" height="600" loading="eager" />}
+          {post.image && <img src={post.image} alt={post.imageAlt} class="blog-post-hero" width="1400" height="788" loading="eager" fetchpriority="high" decoding="async" />}
         </header>
         <div class="blog-post-body">
           <slot />
@@ -64,7 +64,7 @@ const formattedDate = new Date(post.publishDate + 'T12:00:00').toLocaleDateStrin
           <div class="related-grid">
             {related.map(r => (
               <a href={`/blog/${r.slug}/`} class="related-card">
-                {r.image && <img src={r.image} alt={r.imageAlt} loading="lazy" decoding="async" />}
+                {r.image && <img src={r.image} alt={r.imageAlt} loading="lazy" decoding="async"  width="1400" height="788" />}
                 <div class="related-card-body">
                   <h3>{r.title}</h3>
                   <p>{r.excerpt}</p>

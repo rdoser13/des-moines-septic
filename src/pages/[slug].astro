@@ -14,11 +14,11 @@ export function getStaticPaths() {
 const { kind, slug } = Astro.props as { kind: 'service' | 'suburb'; slug: string };
 const ICONS: Record<string, string> = { "septic-tank-pumping": "🚛", "septic-tank-cleaning": "💧", "septic-tank-repair": "🔧", "emergency-septic-service": "🚨", "septic-inspection": "📋" };
 const SERVICE_INLINE_IMG: Record<string, { src: string; alt: string } | null> = {
-  "septic-tank-pumping": { src: "/images/septic-pumping-hose-connection.jpg", alt: "Local Des Moines septic pumping technician connecting a vacuum hose to a residential septic tank riser" },
-  "septic-tank-cleaning": { src: "/images/two-tech-septic-crew-des-moines.jpg", alt: "Two-person Des Moines septic crew performing a full septic tank cleaning with vacuum hose at an open tank" },
-  "septic-tank-repair": { src: "/images/septic-tank-repair-des-moines.jpg", alt: "Two Des Moines septic technicians inspecting and repairing an open residential septic tank from the driveway" },
-  "emergency-septic-service": { src: "/images/emergency-septic-service-des-moines.jpg", alt: "Emergency septic service truck parked at an Iowa home, with technician dispatching a vacuum hose for fast response" },
-  "septic-inspection": { src: "/images/septic-tank-inspection-camera-iowa.jpg", alt: "Iowa-certified septic inspector running a camera inspection into a residential septic tank during a Time of Transfer inspection" }
+  "septic-tank-pumping": { src: "/images/septic-pumping-hose-connection.webp", alt: "Local Des Moines septic pumping technician connecting a vacuum hose to a residential septic tank riser" },
+  "septic-tank-cleaning": { src: "/images/two-tech-septic-crew-des-moines.webp", alt: "Two-person Des Moines septic crew performing a full septic tank cleaning with vacuum hose at an open tank" },
+  "septic-tank-repair": { src: "/images/septic-tank-repair-des-moines.webp", alt: "Two Des Moines septic technicians inspecting and repairing an open residential septic tank from the driveway" },
+  "emergency-septic-service": { src: "/images/emergency-septic-service-des-moines.webp", alt: "Emergency septic service truck parked at an Iowa home, with technician dispatching a vacuum hose for fast response" },
+  "septic-inspection": { src: "/images/septic-tank-inspection-camera-iowa.webp", alt: "Iowa-certified septic inspector running a camera inspection into a residential septic tank during a Time of Transfer inspection" }
 };
 ---
 {kind === 'service' && (() => {
@@ -77,7 +77,7 @@ const SERVICE_INLINE_IMG: Record<string, { src: string; alt: string } | null> = 
             <div style="margin-bottom:32px">
               <h2>{s.h2}</h2>
               {i === 1 && SERVICE_INLINE_IMG[slug] && (
-                <img src={SERVICE_INLINE_IMG[slug]!.src} alt={SERVICE_INLINE_IMG[slug]!.alt} loading="lazy" decoding="async" style="border-radius:8px;margin:0 0 20px;box-shadow:0 4px 14px rgba(0,0,0,.08);max-height:420px;width:100%;object-fit:cover" />
+                <img src={SERVICE_INLINE_IMG[slug]!.src} alt={SERVICE_INLINE_IMG[slug]!.alt} loading="lazy" decoding="async" style="border-radius:8px;margin:0 0 20px;box-shadow:0 4px 14px rgba(0,0,0,.08);max-height:420px;width:100%;object-fit:cover"  width="1400" height="788" />
               )}
               <p>{s.body}</p>
             </div>
@@ -148,11 +148,11 @@ const SERVICE_INLINE_IMG: Record<string, { src: string; alt: string } | null> = 
     ]
   };
   const SUBURB_IMG = {
-    "des-moines":      { src: "/images/septic-pumping-hose-connection.jpg",     alt: `Local septic technician performing a septic tank pumping at a Des Moines, Iowa home` },
-    "west-des-moines": { src: "/images/two-tech-septic-crew-des-moines.jpg",    alt: `Two-person septic crew servicing a residential tank in West Des Moines, Iowa` },
-    "ankeny":          { src: "/images/septic-tank-cleaning-des-moines.jpg",    alt: `Septic technician cleaning a residential septic tank at an Ankeny, Iowa home` },
-    "waukee":          { src: "/images/septic-tank-repair-des-moines.jpg",      alt: `Septic technicians inspecting and repairing a residential septic tank in Waukee, Iowa` },
-    "norwalk":         { src: "/images/septic-tank-inspection-camera-iowa.jpg", alt: `Iowa-certified inspector running a camera into a septic tank at a Norwalk, Iowa property` }
+    "des-moines":      { src: "/images/septic-pumping-hose-connection.webp",     alt: `Local septic technician performing a septic tank pumping at a Des Moines, Iowa home` },
+    "west-des-moines": { src: "/images/two-tech-septic-crew-des-moines.webp",    alt: `Two-person septic crew servicing a residential tank in West Des Moines, Iowa` },
+    "ankeny":          { src: "/images/septic-tank-cleaning-des-moines.webp",    alt: `Septic technician cleaning a residential septic tank at an Ankeny, Iowa home` },
+    "waukee":          { src: "/images/septic-tank-repair-des-moines.webp",      alt: `Septic technicians inspecting and repairing a residential septic tank in Waukee, Iowa` },
+    "norwalk":         { src: "/images/septic-tank-inspection-camera-iowa.webp", alt: `Iowa-certified inspector running a camera into a septic tank at a Norwalk, Iowa property` }
   };
   const subImg = (SUBURB_IMG as any)[slug];
   return (
@@ -183,7 +183,7 @@ const SERVICE_INLINE_IMG: Record<string, { src: string; alt: string } | null> = 
         <div class="container" style="max-width:820px">
           <p style="font-size:1.1rem">{content.intro}</p>
           {subImg && (
-            <img src={subImg.src} alt={subImg.alt} loading="lazy" decoding="async" style="border-radius:8px;margin:24px 0 8px;box-shadow:0 4px 14px rgba(0,0,0,.08);max-height:420px;width:100%;object-fit:cover" />
+            <img src={subImg.src} alt={subImg.alt} loading="lazy" decoding="async" style="border-radius:8px;margin:24px 0 8px;box-shadow:0 4px 14px rgba(0,0,0,.08);max-height:420px;width:100%;object-fit:cover"  width="1400" height="788" />
           )}
           <h2>{content.leadH2}</h2>
           <p>{content.leadBody}</p>

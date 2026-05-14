@@ -20,7 +20,7 @@ export const BLOG_POSTS: BlogPostMeta[] = [
     excerpt: "Septic tank pumping in Iowa typically runs $300 to $650 in 2026. Here's what affects price and how to avoid surprise charges.",
     publishDate: "2026-05-13",
     readMinutes: 6,
-    image: "/images/septic-tank-pumping-des-moines.jpg",
+    image: "/images/septic-tank-pumping-des-moines.webp",
     imageAlt: "Septic tank pumping service in Iowa"
   },
   {
@@ -30,7 +30,7 @@ export const BLOG_POSTS: BlogPostMeta[] = [
     excerpt: "Most Iowa homes need septic pumping every 3 to 5 years. Here's how household size, tank size, and Iowa winters change that schedule.",
     publishDate: "2026-05-13",
     readMinutes: 5,
-    image: "/images/septic-tank-cleaning-des-moines.jpg",
+    image: "/images/septic-tank-cleaning-des-moines.webp",
     imageAlt: "Septic tank pumping schedule in Iowa"
   },
   {
@@ -40,7 +40,7 @@ export const BLOG_POSTS: BlogPostMeta[] = [
     excerpt: "Slow drains, sewage smell, and gurgling pipes are warning signs. Here's how Iowa homeowners can spot a full tank before backup.",
     publishDate: "2026-05-13",
     readMinutes: 6,
-    image: "/images/septic-pumping-hose-connection.jpg",
+    image: "/images/septic-pumping-hose-connection.webp",
     imageAlt: "Signs of a full septic tank"
   },
   {
@@ -50,7 +50,7 @@ export const BLOG_POSTS: BlogPostMeta[] = [
     excerpt: "Iowa law requires a Time of Transfer septic inspection before most property sales. Here's the timeline, who can inspect, and what happens if your system fails.",
     publishDate: "2026-05-13",
     readMinutes: 8,
-    image: "/images/septic-tank-inspection-camera-iowa.jpg",
+    image: "/images/septic-tank-inspection-camera-iowa.webp",
     imageAlt: "Iowa Time of Transfer septic inspection"
   },
   {
@@ -60,7 +60,7 @@ export const BLOG_POSTS: BlogPostMeta[] = [
     excerpt: "Installing or replacing a septic system in Polk County, Iowa requires a permit and soil evaluation. Here's the process step by step.",
     publishDate: "2026-05-13",
     readMinutes: 7,
-    image: "/images/septic-tank-repair-des-moines.jpg",
+    image: "/images/septic-tank-repair-des-moines.webp",
     imageAlt: "Polk County Iowa septic permit process"
   }
 ];

@@ -9,8 +9,10 @@ interface Props {
   description: string;
   canonical?: string;
   schema?: any;
+  heroImage?: string;
 }
-const { title, description, canonical, schema } = Astro.props;
+const { title, description, canonical, schema, heroImage } = Astro.props;
+const preloadHero = heroImage || '/images/septic-tank-pumping-des-moines.webp';
 const url = canonical || `https://${SITE.domain}${Astro.url.pathname}`;
 
 const baseSchema = {
@@ -18,7 +20,7 @@ const baseSchema = {
   "@type": "LocalBusiness",
   "@id": `https://${SITE.domain}/#business`,
   "name": SITE.name,
-  "image": `https://${SITE.domain}/logo.png`,
+  "image": `https://${SITE.domain}/logo.webp`,
   "url": `https://${SITE.domain}/`,
   "telephone": SITE.phone,
   "priceRange": "$$",
@@ -61,7 +63,9 @@ const baseSchema = {
   <meta name="robots" content="index,follow" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&amp;family=Open+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet" />
+  <link rel="preload" as="image" href={preloadHero} fetchpriority="high" />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&amp;family=Open+Sans:wght@400;600;700&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&amp;family=Open+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet" /></noscript>
   <script type="application/ld+json" set:html={JSON.stringify(baseSchema)} />
   {schema && (Array.isArray(schema)
     ? schema.map(s => <script type="application/ld+json" set:html={JSON.stringify(s)} />)
