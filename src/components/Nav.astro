@@ -40,19 +40,37 @@ import { SITE, SERVICES, SUBURBS } from '../data/site';
 <script>
   const t = document.getElementById('navToggle');
   const l = document.getElementById('navLinks');
+  const isMobile = () => window.innerWidth <= 920;
   const setState = (open: boolean) => {
     if (!l || !t) return;
     l.classList.toggle('open', open);
     t.setAttribute('aria-expanded', String(open));
     t.textContent = open ? '✕' : '☰';
+    if (!open) {
+      l.querySelectorAll('.dropdown.open').forEach(d => d.classList.remove('open'));
+    }
   };
   t?.addEventListener('click', () => setState(!l?.classList.contains('open')));
-  // Close menu when a real navigation link is tapped (not a parent dropdown toggle)
+
+  // On mobile, tapping a dropdown's top-level label toggles the submenu instead of navigating.
+  l?.querySelectorAll('.dropdown > a').forEach(a => {
+    a.addEventListener('click', (e) => {
+      if (!isMobile() || !l.classList.contains('open')) return;
+      e.preventDefault();
+      const parent = a.parentElement;
+      const wasOpen = parent?.classList.contains('open');
+      l.querySelectorAll('.dropdown.open').forEach(d => d.classList.remove('open'));
+      if (!wasOpen) parent?.classList.add('open');
+    });
+  });
+
+  // Tapping any leaf link (not a dropdown parent) closes the menu.
   l?.querySelectorAll('a').forEach(a => {
+    if (a.parentElement?.classList.contains('dropdown')) return;
     a.addEventListener('click', () => setState(false));
   });
-  // Close on resize past breakpoint
+
   window.addEventListener('resize', () => {
-    if (window.innerWidth > 920) setState(false);
+    if (!isMobile()) setState(false);
   });
 </script>

@@ -156,7 +156,12 @@ img { max-width: 100%; height: auto; display: block; }
     overflow-y: auto;
   }
   .nav-links.open > li > a { padding: 14px 24px; border-bottom: 1px solid var(--border); display: block; }
-  .nav-links.open .dropdown-menu { display: block; position: static; box-shadow: none; border: 0; padding: 0; background: var(--light-gray); min-width: 0; }
+  .nav-links.open .dropdown { display: block; }
+  .nav-links.open .dropdown-menu { display: none; position: static; box-shadow: none; border: 0; padding: 0; background: var(--light-gray); min-width: 0; }
+  .nav-links.open .dropdown.open .dropdown-menu { display: block; }
+  .nav-links.open .dropdown > a { display: flex; justify-content: space-between; align-items: center; }
+  .nav-links.open .dropdown > a:after { transition: transform .2s; }
+  .nav-links.open .dropdown.open > a:after { transform: rotate(180deg); }
   .nav-links.open .dropdown-menu li a { padding-left: 40px; }
 }
 @media (max-width: 600px) {
