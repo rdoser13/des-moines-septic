@@ -15,12 +15,12 @@ export interface BlogPostMeta {
 export const BLOG_POSTS: BlogPostMeta[] = [
   {
     slug: "best-septic-tank-pumping-companies-des-moines",
-    title: "Best Septic Tank Pumping Companies in Des Moines, Iowa (2026)",
+    title: "5 Best Septic Tank Pumping Companies in Des Moines, Iowa (2026)",
     description: "Looking for septic tank pumping in Des Moines? Here are 5 legitimate, locally-operating septic companies serving the Des Moines metro in 2026.",
     excerpt: "5 legitimate, locally-operating septic tank pumping companies serving the Des Moines metro in 2026, with verified details and homepage screenshots.",
     publishDate: "2026-05-14",
     readMinutes: 8,
-    image: "/images/des-moines-septic-homepage.webp",
+    image: "/images/best-septic-tank-pumping-companies-des-moines-iowa.webp",
     imageAlt: "Best septic tank pumping companies in Des Moines Iowa"
   },
   {
