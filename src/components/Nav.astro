@@ -33,12 +33,26 @@ import { SITE, SERVICES, SUBURBS } from '../data/site';
     <div class="header-cta">
       <a href={`tel:${SITE.phoneTel}`} class="header-phone">{SITE.phone}</a>
       <a href="/contact/" class="btn">Request Service</a>
-      <button class="mobile-toggle" id="navToggle" aria-label="Menu">☰</button>
+      <button class="mobile-toggle" id="navToggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">☰</button>
     </div>
   </div>
 </header>
 <script>
   const t = document.getElementById('navToggle');
   const l = document.getElementById('navLinks');
-  t?.addEventListener('click', () => l?.classList.toggle('open'));
+  const setState = (open: boolean) => {
+    if (!l || !t) return;
+    l.classList.toggle('open', open);
+    t.setAttribute('aria-expanded', String(open));
+    t.textContent = open ? '✕' : '☰';
+  };
+  t?.addEventListener('click', () => setState(!l?.classList.contains('open')));
+  // Close menu when a real navigation link is tapped (not a parent dropdown toggle)
+  l?.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => setState(false));
+  });
+  // Close on resize past breakpoint
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 920) setState(false);
+  });
 </script>
