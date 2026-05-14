@@ -14,6 +14,36 @@ export interface BlogPostMeta {
 
 export const BLOG_POSTS: BlogPostMeta[] = [
   {
+    slug: "best-time-of-year-septic-pumping-iowa",
+    title: "Best Time of Year for Septic Tank Pumping in Iowa",
+    description: "Fall is the best time to pump your septic tank in Iowa. Here's how Iowa's frost depth, freeze-thaw cycle, and seasonal demand affect pricing and scheduling.",
+    excerpt: "Fall is the best time to pump your septic tank in Iowa. Here's how Iowa's frost depth and seasonal demand affect pricing and scheduling.",
+    publishDate: "2026-05-14",
+    readMinutes: 6,
+    image: "/images/septic-pumping-schedule-inspection-iowa.webp",
+    imageAlt: "Best time of year for septic tank pumping in Iowa"
+  },
+  {
+    slug: "septic-pumping-vs-cleaning-difference",
+    title: "Septic Pumping vs Septic Cleaning: What's the Difference?",
+    description: "Septic pumping and cleaning are different services with different prices. Here's what each includes, when you need them, and what should be on your invoice in Iowa.",
+    excerpt: "Septic pumping and cleaning are different services. Here's what each includes, when you need them, and what should be on your invoice.",
+    publishDate: "2026-05-14",
+    readMinutes: 7,
+    image: "/images/septic-tank-cleaning-des-moines.webp",
+    imageAlt: "Septic pumping vs septic cleaning comparison"
+  },
+  {
+    slug: "what-to-expect-septic-pumping-appointment",
+    title: "What to Expect During a Septic Pumping Appointment in Des Moines",
+    description: "Here's exactly what happens during a septic tank pumping appointment in Iowa, from the phone call to the receipt: prep steps, technician sequence, and what your invoice should include.",
+    excerpt: "Here's exactly what happens during a septic pumping appointment in Iowa, from the phone call to the receipt.",
+    publishDate: "2026-05-14",
+    readMinutes: 7,
+    image: "/images/septic-pumping-hose-connection.webp",
+    imageAlt: "Septic pumping appointment in Des Moines"
+  },
+  {
     slug: "septic-tank-pumping-cost-iowa",
     title: "How Much Does Septic Tank Pumping Cost in Iowa? (2026 Prices)",
     description: "Septic tank pumping in Iowa typically runs $300 to $650 in 2026. Here's what affects price, average tank sizes, and how to avoid surprise charges.",
