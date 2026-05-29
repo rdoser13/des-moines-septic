@@ -14,6 +14,16 @@ export interface BlogPostMeta {
 
 export const BLOG_POSTS: BlogPostMeta[] = [
   {
+    slug: "septic-tank-mistakes",
+    title: "7 Septic Tank Mistakes That Cost Homeowners Thousands",
+    description: "Most septic failures trace back to the same avoidable habits. Here are the 7 septic tank mistakes that cost Iowa homeowners thousands, and how to avoid each one.",
+    excerpt: "The 7 septic tank mistakes that cost homeowners thousands, from skipping pumping to overloading the drain field, plus how Iowa winters change the math.",
+    publishDate: "2026-05-29",
+    readMinutes: 8,
+    image: "/images/septic-tank-mistakes-des-moines.webp",
+    imageAlt: "Common septic tank mistakes that cost Des Moines homeowners thousands"
+  },
+  {
     slug: "best-septic-tank-pumping-companies-des-moines",
     title: "5 Best Septic Tank Pumping Companies in Des Moines, Iowa (2026)",
     description: "Looking for septic tank pumping in Des Moines? Here are 5 legitimate, locally-operating septic companies serving the Des Moines metro in 2026.",
